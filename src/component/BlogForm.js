@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import './BlogForm.css';
 import PostBlog from './PostBlog'; // Import the BlogPost component
 
-export default function BlogForm({ showForm }) {
+export default function BlogForm() {
+    const [showForm, setShowForm] = useState(false);
     const [showPost, setShowPost] = useState(false);
     const [imageURL, setImageURL] = useState('');
     const [name, setName] = useState('');
@@ -14,18 +15,24 @@ export default function BlogForm({ showForm }) {
     }
 
     function cancelHandler() {
-          setShowPost(!showPost)
+         
+        
+      setShowForm(!showForm);
     }
 
     return (
-        <div className='form'>
-            {!showForm && !showPost && (
-                <form onSubmit={formSubmitHandler}>
+        
+        <div >
+            
+          
+  {!showForm && !showPost && (
+                <form className='form' onSubmit={formSubmitHandler}>
                     <label>Image URL</label>
                     <input
                         type='url'
                         value={imageURL}
                         onChange={(e) => setImageURL(e.target.value)}
+                        required
                     />
 
                     <label>Name</label>
@@ -51,5 +58,6 @@ export default function BlogForm({ showForm }) {
                 <PostBlog imageUrl={imageURL} name={name} description={description} />
             )}
         </div>
+        
     );
 }
